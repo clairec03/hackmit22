@@ -16,7 +16,7 @@ function App() {
 
     const [currentSegment, setCurrentSegment] = useState(null);
 
-    const popupDelay = 15;
+    const popupDelay = 20;
     const [seconds, setSeconds] = useState(0.0);
 
     const randomizeSetCurrentSegment = (sg) => {
@@ -43,6 +43,7 @@ function App() {
         ) {
             setCurrentSegment(null);
             setSegments(segments.slice(1)); // removes the first element
+            setProgress(100);
             return;
         }
         if (currentSegment === null) {
@@ -57,7 +58,7 @@ function App() {
     const vidUrl =
         "https://www.youtube.com/watch?v=Yocja_N5s1I&list=PLBDA2E52FB1EF80C9&index=1";
 
-    const [progress, setProgress] = useState(0);
+    const [progress, setProgress] = useState(100);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -66,12 +67,12 @@ function App() {
                 if (!currentSegment) {
                     return oldProgress;
                 }
-                if (oldProgress === 0) {
-                    return 100;
-                }
+                // if (oldProgress === 0) {
+                //     return 100;
+                // }
                 return Math.max(oldProgress - 1, 0);
             });
-        }, 300);
+        }, popupDelay*9);
         return () => {
             clearInterval(timer);
         };
