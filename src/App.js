@@ -4,9 +4,9 @@ import "./App.css";
 import getQuestion from "./lib/firestore/getQuestion";
 
 
-function printQuestion() {
+async function printQuestion() {
     const qid = "x7Bm4AsanidDfi9WYEM9";
-    const question = getQuestion(qid);
+    const question = await getQuestion(qid);
     console.log(question);
 }
 
