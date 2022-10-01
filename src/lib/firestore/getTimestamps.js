@@ -11,8 +11,8 @@ import { firestore } from "../firebase";
  */
 export default async function getTimestamps(lesson) {
     let questions = [];
-    const querySnapshot = await getDocs(collection(firestore, lesson));
-    querySnapshot.forEach((doc) => {
+    const lessonSnapshot = await getDocs(collection(firestore, lesson));
+    lessonSnapshot.forEach((doc) => {
         // console.log(doc.id, " => ", doc.data());
         const segment = {
             seconds: Number(doc.id),

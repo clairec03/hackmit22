@@ -8,3 +8,7 @@
     display: flex;
     padding-left: 35px;
 }
+
+.progress-bar {
+    padding-top: -10px;
+}
