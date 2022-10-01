@@ -1,2 +1,1 @@
 # HackMIT
-# HackMIT

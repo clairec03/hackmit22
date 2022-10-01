@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "create-gitignore": "^0.1.0",
+    "firebase": "^9.10.0"
+  }
+}
