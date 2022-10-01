@@ -2,16 +2,21 @@ import { getDoc, doc } from "firebase/firestore";
 
 import { firestore } from "../firebase";
 
+
+//! NOT WORKING RIGHT NOW
+
 /**
  * Queries the "questions" collection by question ID
  * @async Firestore query
+ * @param {string} lesson
  * @param {string} qid
  * @returns A promise containing the question document as an object
  * @throws null
  */
-export default async function getQuestion(qid) {
+export default async function getQuestion(lesson, qid) {
 
-    const questionRef = doc(firestore, "questions", qid);
+    const lessonRef = doc(firestore, "lessons", lesson, qid);
+    const segmentRef = doc(firestore, )
 
     try {
         const docSnap = await getDoc(questionRef);
