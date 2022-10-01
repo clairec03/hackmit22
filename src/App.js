@@ -3,7 +3,6 @@ import ReactPlayer from "react-player/youtube";
 
 import getTimestamps from "./lib/firestore/getTimestamps";
 import MultipleChoice from "./components/MultipleChoice";
-// import RadioForm from "./components/RadioForm";
 
 import "./globals.css";
 
@@ -15,22 +14,21 @@ function App() {
 
     const [currentSegment, setCurrentSegment] = useState(null);
 
-    const popupDelay = 3;
+    const popupDelay = 15;
     const [seconds, setSeconds] = useState(0.0);
 
     const randomizeSetCurrentSegment = (sg) => {
         let answers = sg.options.slice();
         answers.push(sg.answer.slice());
-        for (let i = 3; i > 0; i--) { // Fischer-Yates shuffle
+        for (let i = 3; i >= 0; i--) { // Fischer-Yates shuffle
             let j = Math.floor(Math.random() * (i + 1));
             let tmp = answers[i];
             answers[i] = answers[j];
             answers[j] = tmp;
         }
-        console.log(answers);
         setCurrentSegment({
-            options: answers.slice(), // pushes answer into the options and randomizes
             ...sg,
+            options: answers.slice(), // pushes answer into the options and randomizes
         });
     }
 
@@ -39,7 +37,7 @@ function App() {
         if (currentSegment !== null &&
                 seconds - currentSegment.seconds >= popupDelay) {
             setCurrentSegment(null);
-            setSegments(segments.shift()) // removes the first element
+            setSegments(segments.slice(1)) // removes the first element
             return;
         }
         if (currentSegment === null) {
@@ -66,7 +64,7 @@ function App() {
                 onProgress={(e) => handleProgress(e.playedSeconds)}
                 onStart={getSegmentsOnStart}
             />
-            {currentSegment && <div>
+            {currentSegment && <div className="multi-choice">
                 <MultipleChoice multiQuestion={currentSegment}/>
             </div>}
             

@@ -3,3 +3,8 @@
     align-items: center;
     /* justify-content: center; */
 }
+
+.multi-choice {
+    display: flex;
+    padding-left: 35px;
+}

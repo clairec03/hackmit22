@@ -21,7 +21,7 @@ export default async function getTimestamps(lesson) {
         questions.push(segment);
     });
     questions.sort((a, b) => {
-        return a.seconds > b.seconds ? -1 : a.seconds < b.seconds ? 1 : 0;
+        return a.seconds < b.seconds ? -1 : a.seconds > b.seconds ? 1 : 0;
     });
     return questions;
 }

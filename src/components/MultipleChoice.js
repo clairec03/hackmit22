@@ -1,16 +1,32 @@
+import { useState } from "react";
+import toast from "react-hot-toast";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import Button from '@mui/material/Button';
 
 export default function MultipleChoice({ multiQuestion }) {
+    
+    const [studentAnswer, setStudentAnswer] = useState("");
+    const choiceChange = (e) => {
+        setStudentAnswer(e.target.value);
+    }
+    
     if (!multiQuestion) {
         return null;
     }
 
-    let answers = multiQuestion.options;
-    // console.log(multiQuestion);
+    let answers = multiQuestion.options.slice();
+    
+    const clickAnswer = () => {
+        if (studentAnswer === multiQuestion.answer)  {
+            toast.success("You win!!");
+        } else {
+            toast.error("Incorrect, try again!");
+        }
+    }
 
     return (
         <FormControl>
@@ -20,6 +36,7 @@ export default function MultipleChoice({ multiQuestion }) {
             <RadioGroup
                 aria-labelledby="multi-choice-radio-group"
                 name="multi-choice-question"
+                onChange={choiceChange}
             >
                 <FormControlLabel
                     value={answers[0]}
@@ -42,6 +59,8 @@ export default function MultipleChoice({ multiQuestion }) {
                     label={answers[3]}
                 />
             </RadioGroup>
+            <Button onClick={clickAnswer} variant="contained">Submit</Button>
         </FormControl>
     );
 }
+
