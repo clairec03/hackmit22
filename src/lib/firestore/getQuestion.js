@@ -15,19 +15,20 @@ import { firestore } from "../firebase";
  */
 export default async function getQuestion(lesson, qid) {
 
-    const lessonRef = doc(firestore, "lessons", lesson, qid);
-    const segmentRef = doc(firestore, )
+    // const lessonRef = doc(firestore, "lessons", lesson, qid);
+    // const segmentRef = doc(firestore, )
 
-    try {
-        const docSnap = await getDoc(questionRef);
-        if (docSnap.exists()) {
-            return docSnap.data();
-        } else {
-            return null;
-        }
-    } catch (err) {
-        console.error("Error querying the user profile docuemnt", err);
-        return null;
-    }
+    // try {
+    //     const docSnap = await getDoc(questionRef);
+    //     if (docSnap.exists()) {
+    //         return docSnap.data();
+    //     } else {
+    //         return null;
+    //     }
+    // } catch (err) {
+    //     console.error("Error querying the user profile docuemnt", err);
+    //     return null;
+    // }
+    return null;
 
 }
