@@ -10,16 +10,18 @@ import { firestore } from "../firebase";
  * @throws null
  */
 export default async function getTimestamps(lesson) {
-    let questions = []
+    let questions = [];
     const querySnapshot = await getDocs(collection(firestore, lesson));
     querySnapshot.forEach((doc) => {
         // console.log(doc.id, " => ", doc.data());
         const segment = {
             seconds: Number(doc.id),
             ...doc.data(),
-        }
+        };
         questions.push(segment);
     });
+    questions.sort((a, b) => {
+        return a.seconds > b.seconds ? -1 : a.seconds < b.seconds ? 1 : 0;
+    });
     return questions;
-    
 }
