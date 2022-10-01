@@ -6,7 +6,7 @@ import { firestore } from "../firebase";
  * Retrieves all the timestamps of segments in seconds
  * @async Firestore query
  * @param {string} lesson
- * @returns An array of numbers
+ * @returns An array of objects, each object representing a question
  * @throws null
  */
 export default async function getTimestamps(lesson) {
