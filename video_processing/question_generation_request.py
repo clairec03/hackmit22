@@ -23,8 +23,8 @@ query_str = text
 print(best_keyword)
 for i in range(len(best_keyword)):
         kw = best_keyword[i]
-        print("printing keyword")
-        print(kw)
+        # print("printing keyword")
+        # print(kw)
         # output = query({"inputs": f"answer: {kw} context: {query_str}"})
         output = query([f"answer: {kw}: {query_str}"])
         print("printing NEW output")
@@ -39,10 +39,3 @@ for i in range(len(best_keyword)):
         print(answer)
         print("bad answer:")
         print(wrong_answers[i])
-
-# output = query({
-# 	"inputs": f"answer: {keyword} context: {query_str}"
-# })
-# out = output[0]
-# question = out['generated_text'].split(': ')
-# print(question[1])
