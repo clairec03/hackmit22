@@ -6,7 +6,21 @@ def sentences2clusters(sentences):
 
     threshold = 0.05 #TODO Find a good threshold
     #TODO remove once the parser is working
-    sentences = [
+    
+    vectorizer = Vectorizer()
+    vectorizer.run(sentences)
+    vectors = vectorizer.vectors
+
+    n_sentences = len(vectors)
+
+    clusters = [[0]]
+    for i in range(1, n_sentences):
+        if spatial.distance.cosine(vectors[i-1], vectors[i]) < threshold:
+            clusters.append([])
+        clusters[-1].append(i)
+    return clusters
+
+sentences = [
         "The computers in recent times have become relevant too particularly in the areas of storage and dissemination of information.",
         "The ease with which the computer function, i.e. the speed, accuracy, and readiness", 
         "With the usefulness of the computer, it has become fashionable for organizations to be computerized, that is, a computer department is created to serve the whole organization and expert or professionals are employed to manage the department.",  
@@ -26,15 +40,34 @@ def sentences2clusters(sentences):
         "Human-computer interaction considers the challenges in making computers useful, usable, and accessible."
 
     ]
-    vectorizer = Vectorizer()
-    vectorizer.run(sentences)
-    vectors = vectorizer.vectors
 
-    n_sentences = len(vectors)
+groups = [[0], [1, 2, 3, 4], [5, 6], [7, 8, 9, 10, 11, 12], [13, 14]]
 
-    clusters = [[0]]
-    for i in range(1, n_sentences):
-        if spatial.distance.cosine(vectors[i-1], vectors[i]) < threshold:
-            clusters.append([])
-        clusters[-1].append(i)
-    return clusters
+
+
+d = dict()
+d["transcript"] = "helllooooo"
+d["timestamps"] = [["revolution", 0], ["is", 0.4]] # ...
+
+firstLastWords = []
+for group in groups:
+    firstWord = sentences[group[0]].split()[0]
+    lastWord = sentences[group[-1]].split()[-1]
+    firstLastWords.append((firstWord, lastWord))
+
+print(firstLastWords)
+
+
+finalTimes = [0]
+
+count = 0
+for (i, pair) in enumerate(d["timestamps"]):
+    if count < 1:
+        count += 1
+        continue
+    if (pair[0] == firstLastWords[count][0] and
+        d["timestamps"][i-1][0] == firstLastWords[count-1][1]):
+        finalTimes.append(pair[1])
+
+
+
