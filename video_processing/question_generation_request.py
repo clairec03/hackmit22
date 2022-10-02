@@ -2,6 +2,7 @@ from this import d
 from text_extractor import best_keyword, text, answers, wrong_answers 
 import requests
 import json
+import copy
 
 # API_URL = "https://api-inference.huggingface.co/models/mrm8488/t5-base-finetuned-question-generation-ap"
 headers = {"Authorization": f"Bearer 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"}
@@ -54,11 +55,12 @@ for i in range(len(best_keyword)):
         print(answer)
         print("bad answer:")
         print(wrong_answers[i])
-        options = wrong_answers[i].append(answers[i])
+        options = copy.copy(wrong_answers[i]) 
+        options += [answers[i]]
         print(options)
-        res_q = {'question': output, 'answer': answer, 'options':wrong_answers[i]}
+        res_q = {'question': output, 'answer': answer, 'options':options}
         final_json.append(res_q)
-        final_json.append({'question': oldout, 'answer': answer, 'options':wrong_answers[i]})
+        final_json.append({'question': oldout, 'answer': answer, 'options':options})
 
 
 out_file = open("questions.json", "w")

@@ -91,4 +91,4 @@ for kw in keywords_tuples:
     if (len(related) >= 3):
         best_keyword.append(keyword)
         answers.append(keyword)
-        wrong_answers.append(related)
+        wrong_answers.append(related[:3])

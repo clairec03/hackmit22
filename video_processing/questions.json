@@ -38,8 +38,6 @@
             "space",
             "time",
             "fabric",
-            "mass",
-            "energy",
             "einstein"
         ]
     },
@@ -54,8 +52,6 @@
             "space",
             "time",
             "fabric",
-            "mass",
-            "energy",
             "einstein"
         ]
     },
@@ -70,7 +66,6 @@
             "effect",
             "affect",
             "difference",
-            "two",
             "affect"
         ]
     },
@@ -85,7 +80,6 @@
             "effect",
             "affect",
             "difference",
-            "two",
             "affect"
         ]
     },
@@ -100,13 +94,6 @@
             "crowd",
             "iron",
             "other",
-            "explanation",
-            "relativity",
-            "crowd",
-            "iron",
-            "other",
-            "explanation",
-            "relativity",
             "general relativity"
         ]
     },
@@ -121,13 +108,6 @@
             "crowd",
             "iron",
             "other",
-            "explanation",
-            "relativity",
-            "crowd",
-            "iron",
-            "other",
-            "explanation",
-            "relativity",
             "general relativity"
         ]
     }
