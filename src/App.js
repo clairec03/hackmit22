@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import ReactPlayer from "react-player/youtube";
-import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
 import toast from "react-hot-toast";
 
 import { auth } from "./lib/firebase";
@@ -23,7 +21,7 @@ import addPoints from "./lib/firestore/addPoints";
 function App() {
     const [user] = useAuthState(auth);
 
-    const lesson = "CSHistory";
+    const lesson = "Wormholes";
 
     const [segments, setSegments] = useState([]); // segments are sorted
     const getSegmentsOnStart = async () => {
@@ -117,11 +115,14 @@ function App() {
         }, popupDelay * 8);
         return () => {
             if (currentSegment) {
-                toast.error("Time ran out, sorry!");
+                if (progress < 1) {
+                    toast.error("Time ran out, sorry!")
+                }
                 resetSegment();
             }
             clearInterval(timer);
         };
+    // eslint-disable-next-line
     }, [currentSegment]);
 
     if (user) {

@@ -21,7 +21,7 @@ export default function MultipleChoice({ multiQuestion, handleCorrect}) {
 
     const clickAnswer = () => {
         if (studentAnswer === multiQuestion.answer) {
-            toast.success("You win!!");
+            toast.success("You are correct!");
             handleCorrect();
         } else {
             toast.error("Incorrect, try again!");
