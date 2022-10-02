@@ -1,3 +1,4 @@
+from this import d
 from text_extractor import best_keyword, text, answers, wrong_answers 
 import requests
 
@@ -11,6 +12,15 @@ def query(payload):
 def oldquery(payload):
         response = requests.post("https://api-inference.huggingface.co/models/mrm8488/t5-base-finetuned-question-generation-ap", headers=headers, json=payload)
         return response.json()	
+
+def get_questions_answers(query_str):
+        d = {}
+        kw = best_keyword[0]
+        output = query([f"answer: {kw}: {query_str}"]).split(':')
+        d['question'] = output[1]
+        d['answer'] = answers[0]
+        d['options'] = wrong_answers[0][:3]
+        return d
 
 query_str =  '''Computer science (sometimes called computation science or computing science, but not to be confused with computational science or software engineering) is the study of processes that interact with data and that can be represented as data in the form of programs.,
         It enables the use of algorithms to manipulate, store, and communicate digital information.,
