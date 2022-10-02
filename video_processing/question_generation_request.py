@@ -54,7 +54,7 @@ for i in range(len(best_keyword)):
         print(answer)
         print("bad answer:")
         print(wrong_answers[i])
-        options = wrong_answers[i].append(answer)
+        options = wrong_answers.append(answer)
         res_q = {'question': output, 'answer': answer, 'options':options}
         final_json.append(res_q)
         final_json.append({'question': oldout, 'answer': answer, 'options':options})
