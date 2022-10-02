@@ -1,5 +1,6 @@
 from text_extractor import best_keyword, text, answers, wrong_answers 
 import requests
+import json
 
 # API_URL = "https://api-inference.huggingface.co/models/mrm8488/t5-base-finetuned-question-generation-ap"
 headers = {"Authorization": f"Bearer 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"}
