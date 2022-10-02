@@ -7,8 +7,10 @@
 .multi-choice {
     display: flex;
     padding-left: 35px;
+    flex-direction: column;
 }
 
 .progress-bar {
     padding-top: -10px;
 }
+

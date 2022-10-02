@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import ReactPlayer from "react-player/youtube";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import toast from "react-hot-toast";
 
 import { auth } from "./lib/firebase";
 import getTimestamps from "./lib/firestore/getTimestamps";
@@ -15,7 +18,7 @@ import GoogleButton from "react-google-button";
 import { googleSignIn } from "./lib/auth";
 import getUser from "./lib/firestore/getUser";
 import addUser from "./lib/firestore/addUser";
-import addPoint from "./lib/firestore/addPoint";
+import addPoints from "./lib/firestore/addPoints";
 
 function App() {
     const [user] = useAuthState(auth);
@@ -50,7 +53,7 @@ function App() {
             } else {
                 setPoints(-99);
             }
-        }
+        };
         checkUser();
     }, [user]);
 
@@ -77,8 +80,9 @@ function App() {
     };
 
     const handleCorrectAnswer = () => {
-        addPoint(user.email);
-        setPoints(points + 1);
+        const pointsAdded = Math.ceil(progress / 10); // points 0-10
+        addPoints(user.email, pointsAdded);
+        setPoints(points + pointsAdded);
         resetSegment();
     };
 
@@ -110,8 +114,12 @@ function App() {
                 }
                 return Math.max(oldProgress - 1, 0);
             });
-        }, popupDelay * 10);
+        }, popupDelay * 8);
         return () => {
+            if (currentSegment) {
+                toast.error("Time ran out, sorry!");
+                resetSegment();
+            }
             clearInterval(timer);
         };
     }, [currentSegment]);
@@ -130,6 +138,7 @@ function App() {
                 />
                 {currentSegment && (
                     <div className="multi-choice">
+                        <PointDisplay points={points} />
                         <MultipleChoice
                             multiQuestion={currentSegment}
                             handleCorrect={handleCorrectAnswer}
@@ -142,7 +151,6 @@ function App() {
                         </Box>
                     </div>
                 )}
-                <PointDisplay points={points} />
             </div>
         );
     } else {
