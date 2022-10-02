@@ -9,9 +9,12 @@ import LinearProgress from "@mui/material/LinearProgress";
 import "./globals.css";
 
 function App() {
+
+    const lesson = "CSHistory";
+
     const [segments, setSegments] = useState([]); // segments are sorted
     const getSegmentsOnStart = async () => {
-        setSegments(await getTimestamps("CSHistory"));
+        setSegments(await getTimestamps(lesson));
     };
 
     const [currentSegment, setCurrentSegment] = useState(null);
