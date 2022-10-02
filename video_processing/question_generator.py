@@ -1,49 +1,36 @@
-from fastT5 import get_onnx_model,get_onnx_runtime_sessions,OnnxT5
-from transformers import AutoTokenizer
-from pathlib import Path
-import os
+# Dependencies:
+# !pip install -U transformers==3.0.0
+# !python -m nltk.downloader punkt
+# !git clone https://github.com/patil-suraj/question_generation.git
 
-trained_model_path = './models/'
+text = "Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum \
+and first released in 1991, Python's design philosophy emphasizes code \
+readability with its notable use of significant whitespace."
 
-pretrained_model_name = "t5_squad_v1"
+text2 = "Gravity (from Latin gravitas, meaning 'weight'), or gravitation, is a natural phenomenon by which all \
+things with mass or energy—including planets, stars, galaxies, and even light—are brought toward (or gravitate toward) \
+one another. On Earth, gravity gives weight to physical objects, and the Moon's gravity causes the ocean tides. \
+The gravitational attraction of the original gaseous matter present in the Universe caused it to begin coalescing \
+and forming stars and caused the stars to group together into galaxies, so gravity is responsible for many of \
+the large-scale structures in the Universe. Gravity has an infinite range, although its effects become increasingly \
+weaker as objects get further away"
 
-encoder_path = os.path.join(trained_model_path,f"{pretrained_model_name}-encoder-quantized.onnx")
-decoder_path = os.path.join(trained_model_path,f"{pretrained_model_name}-decoder-quantized.onnx")
-init_decoder_path = os.path.join(trained_model_path,f"{pretrained_model_name}-init-decoder-quantized.onnx")
+text3 = "42 is the answer to life, universe and everything."
 
-model_paths = encoder_path, decoder_path, init_decoder_path
-model_sessions = get_onnx_runtime_sessions(model_paths)
-model = OnnxT5(trained_model_path, model_sessions)
+text4 = "Forrest Gump is a 1994 American comedy-drama film directed by Robert Zemeckis and written by Eric Roth. \
+It is based on the 1986 novel of the same name by Winston Groom and stars Tom Hanks, Robin Wright, Gary Sinise, \
+Mykelti Williamson and Sally Field. The story depicts several decades in the life of Forrest Gump (Hanks), \
+a slow-witted but kind-hearted man from Alabama who witnesses and unwittingly influences several defining \
+historical events in the 20th century United States. The film differs substantially from the novel."
 
-tokenizer = AutoTokenizer.from_pretrained(trained_model_path)
+# %cd question_generation
 
-def get_question(sentence,answer,mdl,tknizer):
-  text = "context: {} answer: {}".format(sentence,answer)
-  print (text)
-  max_len = 256
-  encoding = tknizer.encode_plus(text,max_length=max_len, pad_to_max_length=False,truncation=True, return_tensors="pt")
+from pipelines import pipeline
 
-  input_ids, attention_mask = encoding["input_ids"], encoding["attention_mask"]
+nlp(text3)
 
-  outs = mdl.generate(input_ids=input_ids,
-                                  attention_mask=attention_mask,
-                                  early_stopping=True,
-                                  num_beams=5,
-                                  num_return_sequences=1,
-                                  no_repeat_ngram_size=2,
-                                  max_length=300)
+nlp = pipeline("question-generation", model="valhalla/t5-base-qg-hl")
 
-
-  dec = [tknizer.decode(ids,skip_special_tokens=True) for ids in outs]
-
-
-  Question = dec[0].replace("question:","")
-  Question= Question.strip()
-  return Question
-
-
-context = "Elon Musk said that Tesla will not accept payments in Bitcoin because of environmental concerns."
-answer = "Elon Musk"
-
-ques = get_question(context,answer,model,tokenizer)
-print ("question: ",ques)
+nlp(text3)
+nlp(text4)
+nlp(text2)
