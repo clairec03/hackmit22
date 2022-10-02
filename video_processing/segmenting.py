@@ -3,7 +3,7 @@ import re, json, string, math
 from scipy import spatial
 from sentence_transformers import SentenceTransformer
 from question_generation_request import get_questions_answers
-
+from punctuation_request import punctuate
 def splitSentences(transcript):
     res = re.split(r"\. |\! |\? |[\r\n]", transcript)
     for (i, r) in enumerate(res):
@@ -61,7 +61,7 @@ def getQuestionsTimestamps(path_to_json):
   #Is this punctuated?
     transcriptTimestampJson = open(path_to_json)
     d = json.load(transcriptTimestampJson)
-    transcript = d["transcript"]
+    transcript = punctuate(d["transcript"])
     wordTimes = d["timestamps"]
     print("Number of words is:", len(wordTimes))
 
@@ -86,7 +86,6 @@ def getQuestionsTimestamps(path_to_json):
         text = ' '.join(sentences[start:end+1])
         segment_d = segment_d | get_questions_answers(text) #get dictionary of question and answers
         result += [segment_d]
-    print(result[-1])
     return result
 
 
