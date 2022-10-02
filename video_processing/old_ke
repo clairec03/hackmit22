@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "hackmit-364220",
+    "private_key_id": "150a34f79b77ae72f1078a20353968ec4e5f16f8",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDPXkvJjaW/f6DV\nPrEqFL0CkVQX7a4Jhf9FrpnC11kO81sQo8kanqXjw2euGhQjL3m0riWNeeB/r7l4\nci+6ckjPptQ8TPWYdp1gBYQWaiAAA6pjP0s/SHE4ISfBihGgeRpqN4LMTKJMJVUj\nh70vrXJyzvI+7ltL2ApGroIpm/gq1kwkIb/QpB6YODMhqKZB9OwB6G9q+sf9Bxip\nbwERoRweaAc4AR7Vh1LFM098YedunlpxyUjX0ws9t+flYTfFJ9+nBCLTus4LL8S2\nHDzXKpzPTRyv+qNjE/qYBtETEvfohq5PPMKWfTz5b/dtXYEOlpCcMdxtaTa3n7QT\ntVaq59MlAgMBAAECggEAHK0UEEEZI38RQoajC52G47+CywpQZRBq1CaIgd6zefNM\n67in5e6mzx/ltbhKgkZy707zx3mMAkGj2tROOwYfK9liA8gQCxpAD21ug4ZVJYYG\n6SbxZMTDpLjvsqkWte55U33uBbWFQ2rC4svHGDxFQDt+WWsvJIZcKW5sITfoh3e6\nBcQWyfoXal0PlTQvqhu8Q4roWS8JS/zM+7aDNcf5ZRDD85dXkRdrmkpmCGAWENkk\nCUynfwLv+7udZ2Fqqvi/KtdJEt4KvuJ1fU9GrK/GwsvYsZylDgr5YD/ZSqhARcjJ\ngxJxaiRSvH9yJQf5KKSBY244MBmz4zMRHIFRjDljQwKBgQD86q0zSinN2SPyl7Oc\nWiNn0TpD0hHXRTRsTc0DYfeji5Wl5rp4UGCeJG4iqlCzYu4ZWna3vEv0LAF6ANww\nESjx1ATveHjbd4U3+fz0fPCPVl4hE2qABm5PJRbW0rlHcfqZdl5gtMaYPqY/iWd4\n0HMEw2GAf5+kMvbs7CFVT4RxswKBgQDR5XfnclOnFw5ItrUTmG6xO2BinGWiMdzE\njSLcmuZX8S/D2Q/C+fQxrC1nKFJM/DBlet14DpU6XmREsIHnFxIZqVQuHL93NrtS\nn2kp6ZLOkrrJdbRAkab7FfNY44wsfuWzmIvZWKV8mZ7c/TmSGGtgzMl1bolj51LO\n4NDrQcxLxwKBgQCbLhZ1ONTrg4al62R902ST53FbeYIO1lxy802N/Mcn5pY8Q5Q4\nDAEsJugYhu2bE2FJ1xKua28i8vk49VwkdfLsZg1dLUriRbRMgyssi5hCKlj47GPV\nB50ZHIWl64dZCdsb29/OcDzF3vK8Wz9MhoF787FYWXYHFmohNkTBhleaNwKBgQDC\nCIcXhjCevkmOHpi2TKvHW0R25G1vyvhzGqWnmepmUaf+PKK9c6OyZ6BxRG0QjfGP\nXk1tts1s7+VxOlpb7o/k+QvAtQKqigYRExx8ilgUbsANjKndJsheRKR4/6GNYKGn\nrNVbTv9sd/bMA6s8yyY4jheOX2jS2f1LEbkQQftB8QKBgQCiPqofTTkiM2VpE4ES\n6uQMMTtaydo03H8Jp8IRD9QZgY0BWwKQruKShFM5K3ENHZChL9tzqWgyfJbeYS98\nx+lvQx8VEJhN3UELHixwz+FHVycY8Y5J4IfbPsSpIhbrWtONL+5AV4ZJhlPfVD2/\nBaPtJgvaEZk4XplVY2R4H/MA2Q==\n-----END PRIVATE KEY-----\n",
+    "client_email": "mit-hack-speech@hackmit-364220.iam.gserviceaccount.com",
+    "client_id": "105692872674357679940",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mit-hack-speech%40hackmit-364220.iam.gserviceaccount.com"
+  }
+  
