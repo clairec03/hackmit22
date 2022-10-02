@@ -12,7 +12,7 @@ root.render(
                 // Define default options
                 duration: 4000,
                 style: {
-                    "text-align": "center",
+                    textAlign: "center",
                     borderRadius: "10px",
                 },
                 // Default options for specific types

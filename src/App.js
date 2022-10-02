@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import ReactPlayer from "react-player/youtube";
 
+import { auth } from "./lib/firebase";
 import getTimestamps from "./lib/firestore/getTimestamps";
+
 import MultipleChoice from "./components/MultipleChoice";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
-
 import "./globals.css";
 
+import GoogleButton from "react-google-button";
+import { googleSignIn } from "./lib/auth";
+
 function App() {
+    const [user] = useAuthState(auth);
 
     const lesson = "CSHistory";
 
@@ -21,6 +27,14 @@ function App() {
 
     const popupDelay = 20;
     const [seconds, setSeconds] = useState(0.0);
+
+    const [progress, setProgress] = useState(100);
+
+    useEffect(() => {
+        if (user) {
+            ;
+        }
+    }, [user]);
 
     const randomizeSetCurrentSegment = (sg) => {
         let answers = sg.options.slice();
@@ -58,15 +72,11 @@ function App() {
         }
     };
 
-    const vidUrl =
-        "https://www.youtube.com/watch?v=Yocja_N5s1I&list=PLBDA2E52FB1EF80C9&index=1";
-
-    const [progress, setProgress] = useState(100);
+    const vidUrl = "https://www.youtube.com/watch?v=9P6rdqiybaw"
 
     useEffect(() => {
         const timer = setInterval(() => {
             setProgress((oldProgress) => {
-                console.log(oldProgress);
                 if (!currentSegment) {
                     return oldProgress;
                 }
@@ -75,36 +85,45 @@ function App() {
                 // }
                 return Math.max(oldProgress - 1, 0);
             });
-        }, popupDelay*9);
+        }, popupDelay * 9);
         return () => {
             clearInterval(timer);
         };
     }, [currentSegment]);
 
-    return (
-        <div className="center">
-            <ReactPlayer
-                url={vidUrl}
-                playing={true}
-                volume={1}
-                width="75vw"
-                height="75vh"
-                onProgress={(e) => handleProgress(e.playedSeconds)}
-                onStart={getSegmentsOnStart}
+    if (user) {
+        return (
+            <div className="center">
+                <ReactPlayer
+                    url={vidUrl}
+                    playing={true}
+                    volume={1}
+                    width="75vw"
+                    height="75vh"
+                    onProgress={(e) => handleProgress(e.playedSeconds)}
+                    onStart={getSegmentsOnStart}
+                />
+                {currentSegment && (
+                    <div className="multi-choice">
+                        <MultipleChoice multiQuestion={currentSegment} />
+                        <Box sx={{ width: "100%" }}>
+                            <LinearProgress
+                                variant="determinate"
+                                value={progress}
+                            />
+                        </Box>
+                    </div>
+                )}
+            </div>
+        );
+    } else {
+        return (
+            <GoogleButton
+                type="light"
+                onClick={googleSignIn}
             />
-            {currentSegment && (
-                <div className="multi-choice">
-                    <MultipleChoice multiQuestion={currentSegment} />
-                    <Box sx={{ width: "100%" }}>
-                        <LinearProgress
-                            variant="determinate"
-                            value={progress}
-                        />
-                    </Box>
-                </div>
-            )}
-        </div>
-    );
+        );
+    }
 }
 
 export default App;
