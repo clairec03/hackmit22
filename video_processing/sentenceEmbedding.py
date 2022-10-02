@@ -1,3 +1,6 @@
+
+# ! DEPRECTAED, go to segmentation.py
+
 from sent2vec.vectorizer import Vectorizer
 from scipy import spatial
 import numpy as np
