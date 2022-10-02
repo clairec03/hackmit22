@@ -131,6 +131,7 @@ function App() {
                 <ReactPlayer
                     url={vidUrl}
                     playing={true}
+                    controls={true}
                     volume={1}
                     width="75vw"
                     height="75vh"
