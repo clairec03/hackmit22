@@ -8,7 +8,7 @@ import { firestore } from "../firebase";
  * @param {string} email
  * @throws null
  */
-export default async function addUserProfile(email) {
+export default async function addUser(email) {
     const userRef = doc(firestore, "profiles", email);
     try {
         await setDoc(userRef, { points: 0 });

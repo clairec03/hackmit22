@@ -6,12 +6,16 @@ import { auth } from "./lib/firebase";
 import getTimestamps from "./lib/firestore/getTimestamps";
 
 import MultipleChoice from "./components/MultipleChoice";
+import PointDisplay from "./components/PointDisplay";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import "./globals.css";
 
 import GoogleButton from "react-google-button";
 import { googleSignIn } from "./lib/auth";
+import getUser from "./lib/firestore/getUser";
+import addUser from "./lib/firestore/addUser";
+import addPoint from "./lib/firestore/addPoint";
 
 function App() {
     const [user] = useAuthState(auth);
@@ -30,10 +34,24 @@ function App() {
 
     const [progress, setProgress] = useState(100);
 
+    const [points, setPoints] = useState(-99);
+
     useEffect(() => {
-        if (user) {
-            ;
+        const checkUser = async () => {
+            if (user) {
+                const profile = await getUser(user.email);
+                if (!profile) {
+                    addUser(user.email);
+                    setPoints(0);
+                } else {
+                    console.log(profile);
+                    setPoints(profile.points);
+                }
+            } else {
+                setPoints(-99);
+            }
         }
+        checkUser();
     }, [user]);
 
     const randomizeSetCurrentSegment = (sg) => {
@@ -52,15 +70,25 @@ function App() {
         });
     };
 
+    const resetSegment = () => {
+        setCurrentSegment(null);
+        setSegments(segments.slice(1)); // removes the first element
+        setProgress(100);
+    };
+
+    const handleCorrectAnswer = () => {
+        addPoint(user.email);
+        setPoints(points + 1);
+        resetSegment();
+    };
+
     const handleProgress = (secs) => {
         setSeconds(Math.floor(secs));
         if (
             currentSegment !== null &&
             seconds - currentSegment.seconds >= popupDelay
         ) {
-            setCurrentSegment(null);
-            setSegments(segments.slice(1)); // removes the first element
-            setProgress(100);
+            resetSegment();
             return;
         }
         if (currentSegment === null) {
@@ -72,7 +100,7 @@ function App() {
         }
     };
 
-    const vidUrl = "https://www.youtube.com/watch?v=9P6rdqiybaw"
+    const vidUrl = "https://www.youtube.com/watch?v=9P6rdqiybaw";
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -80,12 +108,9 @@ function App() {
                 if (!currentSegment) {
                     return oldProgress;
                 }
-                // if (oldProgress === 0) {
-                //     return 100;
-                // }
                 return Math.max(oldProgress - 1, 0);
             });
-        }, popupDelay * 9);
+        }, popupDelay * 10);
         return () => {
             clearInterval(timer);
         };
@@ -105,7 +130,10 @@ function App() {
                 />
                 {currentSegment && (
                     <div className="multi-choice">
-                        <MultipleChoice multiQuestion={currentSegment} />
+                        <MultipleChoice
+                            multiQuestion={currentSegment}
+                            handleCorrect={handleCorrectAnswer}
+                        />
                         <Box sx={{ width: "100%" }}>
                             <LinearProgress
                                 variant="determinate"
@@ -114,15 +142,11 @@ function App() {
                         </Box>
                     </div>
                 )}
+                <PointDisplay points={points} />
             </div>
         );
     } else {
-        return (
-            <GoogleButton
-                type="light"
-                onClick={googleSignIn}
-            />
-        );
+        return <GoogleButton type="light" onClick={googleSignIn} />;
     }
 }
 

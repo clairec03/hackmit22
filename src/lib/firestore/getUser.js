@@ -9,7 +9,7 @@ import { firestore } from "../firebase";
  * @returns A promise containing the user profile document as an object
  * @throws null
  */
-export default async function checkUserExists(email) {
+export default async function getUser(email) {
 
     const userRef = doc(firestore, "profiles", email);
 
