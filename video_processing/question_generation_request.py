@@ -32,16 +32,20 @@ query_str =  '''Computer science (sometimes called computation science or comput
 
 query_str = text
 print(best_keyword)
+
+final_json = []
 for i in range(len(best_keyword)):
         kw = best_keyword[i]
         # print("printing keyword")
         # print(kw)
         # output = query({"inputs": f"answer: {kw} context: {query_str}"})
+        res = dict()
         output = query([f"answer: {kw}: {query_str}"])
         print("printing NEW output")
         print(output)
         print("printing OLD output")
-        print(oldquery({"inputs": f"answer: {kw} context: {query_str}"}))
+        oldout = (oldquery({"inputs": f"answer: {kw} context: {query_str}"}))
+
         # out = output[0]
         # question = out['generated_text'].split(': ')
         # print(question[1])
@@ -50,3 +54,14 @@ for i in range(len(best_keyword)):
         print(answer)
         print("bad answer:")
         print(wrong_answers[i])
+        options = wrong_answers[i].append(answer)
+        res_q = {'question': output, 'answer': answer, 'options':options}
+        final_json.append(res_q)
+        final_json.append({'question': oldout, 'answer': answer, 'options':options})
+
+
+out_file = open("questions.json", "w")
+  
+json.dump(final_json, out_file, indent = 4)
+  
+out_file.close()
