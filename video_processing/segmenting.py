@@ -2,7 +2,7 @@ import re, json, string, math
 
 from scipy import spatial
 from sentence_transformers import SentenceTransformer
-
+from question_generation_request import get_questions_answers
 
 def splitSentences(transcript):
     res = re.split(r"\. |\! |\? |[\r\n]", transcript)
@@ -52,12 +52,14 @@ def findTimestamps(wordTimes, sentences, segments):
     for (start, _) in segments:
         wordIndex = sum(sentenceLengths[:start])
         finalTimes.append(math.ceil(wordTimes[wordIndex][1]))
-
+    #shifted backwards (to left)
+    finalTimes.pop(0)
+    finalTimes.append(math.ceil(wordTimes[-1][1]))
     return finalTimes
 
-
-def main():
-    transcriptTimestampJson = open('../transcripts/johnGreen.json')
+def getQuestionsTimestamps(path_to_json):
+  #Is this punctuated?
+    transcriptTimestampJson = open(path_to_json)
     d = json.load(transcriptTimestampJson)
     transcript = d["transcript"]
     wordTimes = d["timestamps"]
@@ -72,13 +74,25 @@ def main():
     print(f"\n{len(segments)} segments found!\n")
 
     L = findTimestamps(wordTimes, sentences, segments)
+
     print("\nMarked timestamps!\n")
     
     L = list(zip(L, segments))
-    #!  L is an int * (int * int) list, where the first element is a time stamp
-    # in seconds, and the int tuple is the start and ending sentences of
-    # each corresponding sentence
-    print(L)
+    result = []
+    for timestamp, (start, end) in L:
+        segment_d = {}
+        segment_d['timestamp'] = timestamp
+        #get text for this timestamp
+        text = ' '.join(sentences[start:end+1])
+        segment_d = segment_d | get_questions_answers(text) #get dictionary of question and answers
+        result += [segment_d]
+    print(result[-1])
+    return result
+
+
+def main():
+    getQuestionsTimestamps("C:/Users/Meme_/Downloads/sample.json")
+   
 
 
 main()
