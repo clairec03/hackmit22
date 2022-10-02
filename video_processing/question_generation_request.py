@@ -1,6 +1,6 @@
 import requests
 
-API_URL = "https://api-inference.huggingface.co/models/valhalla/t5-base-qa-qg-hl"
+API_URL = "https://api-inference.huggingface.co/models/mrm8488/t5-base-finetuned-question-generation-ap"
 headers = {"Authorization": f"Bearer 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"}
 
 def query(payload):
