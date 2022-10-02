@@ -6,7 +6,12 @@
             }
         ],
         "answer": "stage",
-        "options": null
+        "options": [
+            "number",
+            "cannabis",
+            "herbs",
+            "stage"
+        ]
     },
     {
         "question": [
@@ -15,7 +20,12 @@
             }
         ],
         "answer": "stage",
-        "options": null
+        "options": [
+            "number",
+            "cannabis",
+            "herbs",
+            "stage"
+        ]
     },
     {
         "question": [
@@ -24,7 +34,14 @@
             }
         ],
         "answer": "einstein",
-        "options": null
+        "options": [
+            "space",
+            "time",
+            "fabric",
+            "mass",
+            "energy",
+            "einstein"
+        ]
     },
     {
         "question": [
@@ -33,7 +50,14 @@
             }
         ],
         "answer": "einstein",
-        "options": null
+        "options": [
+            "space",
+            "time",
+            "fabric",
+            "mass",
+            "energy",
+            "einstein"
+        ]
     },
     {
         "question": [
@@ -42,7 +66,13 @@
             }
         ],
         "answer": "affect",
-        "options": null
+        "options": [
+            "effect",
+            "affect",
+            "difference",
+            "two",
+            "affect"
+        ]
     },
     {
         "question": [
@@ -51,7 +81,13 @@
             }
         ],
         "answer": "affect",
-        "options": null
+        "options": [
+            "effect",
+            "affect",
+            "difference",
+            "two",
+            "affect"
+        ]
     },
     {
         "question": [
@@ -60,7 +96,19 @@
             }
         ],
         "answer": "general relativity",
-        "options": null
+        "options": [
+            "crowd",
+            "iron",
+            "other",
+            "explanation",
+            "relativity",
+            "crowd",
+            "iron",
+            "other",
+            "explanation",
+            "relativity",
+            "general relativity"
+        ]
     },
     {
         "question": [
@@ -69,6 +117,18 @@
             }
         ],
         "answer": "general relativity",
-        "options": null
+        "options": [
+            "crowd",
+            "iron",
+            "other",
+            "explanation",
+            "relativity",
+            "crowd",
+            "iron",
+            "other",
+            "explanation",
+            "relativity",
+            "general relativity"
+        ]
     }
 ]

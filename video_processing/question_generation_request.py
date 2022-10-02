@@ -54,10 +54,11 @@ for i in range(len(best_keyword)):
         print(answer)
         print("bad answer:")
         print(wrong_answers[i])
-        options = wrong_answers.append(answer)
-        res_q = {'question': output, 'answer': answer, 'options':options}
+        options = wrong_answers[i].append(answers[i])
+        print(options)
+        res_q = {'question': output, 'answer': answer, 'options':wrong_answers[i]}
         final_json.append(res_q)
-        final_json.append({'question': oldout, 'answer': answer, 'options':options})
+        final_json.append({'question': oldout, 'answer': answer, 'options':wrong_answers[i]})
 
 
 out_file = open("questions.json", "w")
