@@ -1,9 +1,9 @@
 # HackMIT 2022
 # Engageen: NLP-enabled ADHD-inclusive Learning for Engagement, Connectivity and Focus 
 
-AI personal tutor helping you with your own learning material
-Lessons broken down into small, digestible chunks
-Upload your video lecture; your lessons will be generated in seconds
+AI personal tutor helping you with your own learning material.
+Personalized lessons broken down into small, digestible chunks.
+Simply upload your video lecture; your lessons will be generated in seconds
 
 Presentation Demo: https://docs.google.com/presentation/d/1ly-jdB70OebEpCgwnZfUwlklAcSZhC292zzV138IbE8/edit?usp=sharing
 
