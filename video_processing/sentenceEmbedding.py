@@ -1,23 +1,22 @@
 from sent2vec.vectorizer import Vectorizer
 from scipy import spatial
 import numpy as np
-
+from sentence_transformers import SentenceTransformer
 def sentences2clusters(sentences):
 
-    threshold = 0.05 #TODO Find a good threshold
-    #TODO remove once the parser is working
-    
-    vectorizer = Vectorizer()
-    vectorizer.run(sentences)
-    vectors = vectorizer.vectors
+    threshold = 0.35 #TODO Find a good threshold
 
+    model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2')
+    vectors = model.encode(sentences)
     n_sentences = len(vectors)
 
     clusters = [[0]]
     for i in range(1, n_sentences):
+        print(spatial.distance.cosine(vectors[i-1], vectors[i]))
         if spatial.distance.cosine(vectors[i-1], vectors[i]) < threshold:
             clusters.append([])
         clusters[-1].append(i)
+  
     return clusters
 
 sentences = [
@@ -68,6 +67,3 @@ for (i, pair) in enumerate(d["timestamps"]):
     if (pair[0] == firstLastWords[count][0] and
         d["timestamps"][i-1][0] == firstLastWords[count-1][1]):
         finalTimes.append(pair[1])
-
-
-
